@@ -15,6 +15,7 @@ import Usuarios.Usuarios;
 import java.awt.Font;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.DateFormatSymbols;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,6 +40,7 @@ public final class Caixa extends javax.swing.JFrame {
     Usuarios usuarios = new Usuarios();
     int codUsuario;
     DefaultTableModel modelo;
+    SimpleDateFormat sdf = new SimpleDateFormat();
     /**
      * Creates new form Caixa
      */
@@ -70,13 +72,21 @@ public final class Caixa extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         InternalFrameLancamento = new javax.swing.JInternalFrame();
+        InternalFrameFornecedor = new javax.swing.JInternalFrame();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        txtFormadePagamento = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tabelaFornecedor = new javax.swing.JTable();
+        btnOkFornecedor = new javax.swing.JButton();
+        btnSairFornecedor = new javax.swing.JButton();
+        lblImagemFundo4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         lblCodigo = new javax.swing.JLabel();
         txtParcelas = new javax.swing.JSpinner();
         txtResponsavel = new javax.swing.JTextField();
         txtDescricao = new javax.swing.JTextField();
-        comboFormaPagamento = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -90,7 +100,11 @@ public final class Caixa extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         txtCategoria = new javax.swing.JTextField();
         btnEscolherCategoria = new javax.swing.JButton();
+        txtHora = new javax.swing.JFormattedTextField();
         jButton3 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        btnEscolherCategoria1 = new javax.swing.JButton();
+        txtCategoria2 = new javax.swing.JTextField();
         lblImagemFundo = new javax.swing.JLabel();
         lblData1 = new javax.swing.JLabel();
         lblData2 = new javax.swing.JLabel();
@@ -128,6 +142,117 @@ public final class Caixa extends javax.swing.JFrame {
         InternalFrameLancamento.setVisible(true);
         InternalFrameLancamento.getContentPane().setLayout(null);
 
+        InternalFrameFornecedor.setClosable(true);
+        InternalFrameFornecedor.setTitle("Forma de pagamento");
+        InternalFrameFornecedor.setVisible(true);
+        InternalFrameFornecedor.addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                InternalFrameFornecedorInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(null);
+
+        jLabel12.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel12.setText("Pesquisar forma de pagamento");
+        jPanel2.add(jLabel12);
+        jLabel12.setBounds(20, 10, 260, 30);
+
+        txtFormadePagamento.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        txtFormadePagamento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFormadePagamentoKeyReleased(evt);
+            }
+        });
+        jPanel2.add(txtFormadePagamento);
+        txtFormadePagamento.setBounds(20, 40, 600, 32);
+
+        tabelaFornecedor.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        tabelaFornecedor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Forma de pagamento", "Tipo", "Cod"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelaFornecedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tabelaFornecedor.setRowHeight(25);
+        tabelaFornecedor.setSelectionBackground(new java.awt.Color(102, 102, 255));
+        tabelaFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaFornecedorMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tabelaFornecedor);
+        if (tabelaFornecedor.getColumnModel().getColumnCount() > 0) {
+            tabelaFornecedor.getColumnModel().getColumn(0).setPreferredWidth(500);
+            tabelaFornecedor.getColumnModel().getColumn(1).setPreferredWidth(300);
+            tabelaFornecedor.getColumnModel().getColumn(2).setPreferredWidth(90);
+        }
+
+        jPanel2.add(jScrollPane4);
+        jScrollPane4.setBounds(20, 90, 600, 300);
+
+        btnOkFornecedor.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        btnOkFornecedor.setText("Ok");
+        btnOkFornecedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnOkFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkFornecedorActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnOkFornecedor);
+        btnOkFornecedor.setBounds(20, 410, 100, 40);
+
+        btnSairFornecedor.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        btnSairFornecedor.setText("Sair");
+        btnSairFornecedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSairFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairFornecedorActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnSairFornecedor);
+        btnSairFornecedor.setBounds(520, 410, 100, 40);
+        jPanel2.add(lblImagemFundo4);
+        lblImagemFundo4.setBounds(160, 330, 490, 130);
+
+        javax.swing.GroupLayout InternalFrameFornecedorLayout = new javax.swing.GroupLayout(InternalFrameFornecedor.getContentPane());
+        InternalFrameFornecedor.getContentPane().setLayout(InternalFrameFornecedorLayout);
+        InternalFrameFornecedorLayout.setHorizontalGroup(
+            InternalFrameFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+        );
+        InternalFrameFornecedorLayout.setVerticalGroup(
+            InternalFrameFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+        );
+
+        InternalFrameLancamento.getContentPane().add(InternalFrameFornecedor);
+        InternalFrameFornecedor.setBounds(0, 0, 660, 490);
+
         jButton1.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         jButton1.setText("Salvar");
         InternalFrameLancamento.getContentPane().add(jButton1);
@@ -147,20 +272,15 @@ public final class Caixa extends javax.swing.JFrame {
 
         txtParcelas.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         InternalFrameLancamento.getContentPane().add(txtParcelas);
-        txtParcelas.setBounds(570, 120, 70, 32);
+        txtParcelas.setBounds(360, 120, 70, 32);
 
         txtResponsavel.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         InternalFrameLancamento.getContentPane().add(txtResponsavel);
-        txtResponsavel.setBounds(20, 120, 530, 32);
+        txtResponsavel.setBounds(20, 120, 310, 32);
 
         txtDescricao.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         InternalFrameLancamento.getContentPane().add(txtDescricao);
         txtDescricao.setBounds(120, 40, 560, 32);
-
-        comboFormaPagamento.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
-        comboFormaPagamento.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "<Selecione>" }));
-        InternalFrameLancamento.getContentPane().add(comboFormaPagamento);
-        comboFormaPagamento.setBounds(20, 200, 410, 32);
 
         jLabel1.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         jLabel1.setText("Descrição");
@@ -179,17 +299,17 @@ public final class Caixa extends javax.swing.JFrame {
 
         comboData.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         InternalFrameLancamento.getContentPane().add(comboData);
-        comboData.setBounds(660, 120, 180, 32);
+        comboData.setBounds(460, 120, 220, 32);
 
         jLabel6.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         jLabel6.setText("Data");
         InternalFrameLancamento.getContentPane().add(jLabel6);
-        jLabel6.setBounds(660, 90, 36, 30);
+        jLabel6.setBounds(460, 90, 36, 30);
 
         jLabel5.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         jLabel5.setText("Parcelas");
         InternalFrameLancamento.getContentPane().add(jLabel5);
-        jLabel5.setBounds(570, 90, 80, 30);
+        jLabel5.setBounds(360, 90, 80, 30);
 
         jLabel9.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         jLabel9.setText("Valor");
@@ -203,7 +323,7 @@ public final class Caixa extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         jLabel10.setText("Categoria");
         InternalFrameLancamento.getContentPane().add(jLabel10);
-        jLabel10.setBounds(450, 170, 90, 30);
+        jLabel10.setBounds(460, 170, 90, 30);
 
         lblDataCadastro.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         lblDataCadastro.setForeground(new java.awt.Color(255, 0, 0));
@@ -219,22 +339,40 @@ public final class Caixa extends javax.swing.JFrame {
 
         txtCategoria.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         InternalFrameLancamento.getContentPane().add(txtCategoria);
-        txtCategoria.setBounds(450, 200, 340, 32);
+        txtCategoria.setBounds(20, 200, 370, 32);
 
         btnEscolherCategoria.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         btnEscolherCategoria.setText("...");
         InternalFrameLancamento.getContentPane().add(btnEscolherCategoria);
-        btnEscolherCategoria.setBounds(800, 200, 40, 32);
+        btnEscolherCategoria.setBounds(390, 200, 40, 32);
+
+        txtHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        InternalFrameLancamento.getContentPane().add(txtHora);
+        txtHora.setBounds(710, 120, 130, 32);
 
         jButton3.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         jButton3.setText("Sair");
         InternalFrameLancamento.getContentPane().add(jButton3);
         jButton3.setBounds(130, 340, 100, 35);
+
+        jLabel11.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel11.setText("Hora");
+        InternalFrameLancamento.getContentPane().add(jLabel11);
+        jLabel11.setBounds(710, 100, 36, 21);
+
+        btnEscolherCategoria1.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        btnEscolherCategoria1.setText("...");
+        InternalFrameLancamento.getContentPane().add(btnEscolherCategoria1);
+        btnEscolherCategoria1.setBounds(800, 200, 40, 32);
+
+        txtCategoria2.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        InternalFrameLancamento.getContentPane().add(txtCategoria2);
+        txtCategoria2.setBounds(460, 200, 340, 32);
         InternalFrameLancamento.getContentPane().add(lblImagemFundo);
         lblImagemFundo.setBounds(0, 0, 890, 390);
 
         jPanel1.add(InternalFrameLancamento);
-        InternalFrameLancamento.setBounds(0, 0, 900, 420);
+        InternalFrameLancamento.setBounds(0, 0, 900, 560);
 
         lblData1.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         lblData1.setText("Data:");
@@ -608,15 +746,16 @@ public final class Caixa extends javax.swing.JFrame {
         txtResponsavel.setText("");
         txtParcelas.setValue(1);
         comboData.setDate(new Date());
-        
+        sdf.applyPattern("HH:mm");
         
         Object[] options = {"Receita", "Despesa", "Cancelar"};
         int resp = JOptionPane.showOptionDialog(null, "Deseja realizar qual tipo de lançamento?", "Atenção", 
-                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, 
-                new ImageIcon("/ControleDeEstoque/Imagens/IconeMensagemPergunta.png"), options, "Receita");
+                JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,null, options, "Receita");
         if (resp == 0)
         {
-            
+            txtParcelas.setValue(1);
+            txtHora.setText(sdf.format(new Date()));
+            InternalFrameLancamento.setVisible(true);
         }
         else if (resp == 1)
         {
@@ -628,6 +767,60 @@ public final class Caixa extends javax.swing.JFrame {
     private void btnFecharCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharCaixaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnFecharCaixaActionPerformed
+
+    private void txtFormadePagamentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFormadePagamentoKeyReleased
+
+        fornecedores.carregaFornecedor(txtFormadePagamento.getText(), (DefaultTableModel) tabelaFornecedor.getModel(), lblStatusFornecedor);
+
+    }//GEN-LAST:event_txtFormadePagamentoKeyReleased
+
+    private void tabelaFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaFornecedorMouseClicked
+
+        if (evt.getClickCount() == 2)
+        {
+            btnOkFornecedorActionPerformed(null);
+        }
+
+    }//GEN-LAST:event_tabelaFornecedorMouseClicked
+
+    private void btnOkFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkFornecedorActionPerformed
+
+        int linha = tabelaFornecedor.getSelectedRow();
+        if (linha < 0) {
+            JOptionPane.showMessageDialog(null, "Selecione um fornecedor na tabela!", "Atenção", JOptionPane.WARNING_MESSAGE);
+        } else {
+            txtFormadePagamento.setText(tabelaFornecedor.getModel().getValueAt(linha, 0).toString());
+            //codFornecedor = Integer.valueOf(tabelaFornecedor.getModel().getValueAt(linha, 2).toString());
+
+            InternalFrameFornecedor.dispose();
+        }
+
+    }//GEN-LAST:event_btnOkFornecedorActionPerformed
+
+    private void btnSairFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairFornecedorActionPerformed
+
+        InternalFrameFornecedor.dispose();
+
+    }//GEN-LAST:event_btnSairFornecedorActionPerformed
+
+    private void InternalFrameFornecedorInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_InternalFrameFornecedorInternalFrameClosed
+
+        txtDescricao.setEnabled(true);
+        txtFornecedor.setEnabled(true);
+        txtNota.setEnabled(true);
+        txtResponsavel.setEnabled(true);
+        tabelaProdutosCompra.setEnabled(true);
+        btnAdd.setEnabled(true);
+        btnRemover.setEnabled(true);
+        tabelaParcela.setEnabled(true);
+        txtFormaPagto.setEnabled(true);
+        txtParcelas.setEnabled(true);
+        txtPagto.setEnabled(true);
+        btnPesquisarFornecedor.setEnabled(true);
+
+        btnPesquisarFornecedor.grabFocus();
+
+    }//GEN-LAST:event_InternalFrameFornecedorInternalFrameClosed
 
     /**
      * @param args the command line arguments
@@ -998,21 +1191,26 @@ public final class Caixa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JInternalFrame InternalFrameFornecedor;
     private javax.swing.JInternalFrame InternalFrameLancamento;
     private javax.swing.JButton btnAbrirCaixa;
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnEscolherCategoria;
+    private javax.swing.JButton btnEscolherCategoria1;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFecharCaixa;
     private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnLancar;
+    private javax.swing.JButton btnOkFornecedor;
+    private javax.swing.JButton btnSairFornecedor;
     private com.toedter.calendar.JDateChooser comboData;
-    private javax.swing.JComboBox comboFormaPagamento;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1023,7 +1221,9 @@ public final class Caixa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblCodigo1;
@@ -1033,11 +1233,16 @@ public final class Caixa extends javax.swing.JFrame {
     private javax.swing.JLabel lblDataCadastro;
     private javax.swing.JLabel lblImagemFundo;
     private javax.swing.JLabel lblImagemFundo1;
+    private javax.swing.JLabel lblImagemFundo4;
     private javax.swing.JLabel lblNomeUsuario;
     private javax.swing.JLabel lblSaldo;
     private javax.swing.JTable tabelaCaixa;
+    private javax.swing.JTable tabelaFornecedor;
     private javax.swing.JTextField txtCategoria;
+    private javax.swing.JTextField txtCategoria2;
     private javax.swing.JTextField txtDescricao;
+    private javax.swing.JTextField txtFormadePagamento;
+    private javax.swing.JFormattedTextField txtHora;
     private javax.swing.JSpinner txtParcelas;
     private javax.swing.JTextField txtResponsavel;
     // End of variables declaration//GEN-END:variables
