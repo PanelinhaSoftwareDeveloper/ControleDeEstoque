@@ -770,7 +770,7 @@ public final class Caixa extends javax.swing.JFrame {
 
     private void txtFormadePagamentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFormadePagamentoKeyReleased
 
-        fornecedores.carregaFornecedor(txtFormadePagamento.getText(), (DefaultTableModel) tabelaFornecedor.getModel(), lblStatusFornecedor);
+        //fornecedores.carregaFornecedor(txtFormadePagamento.getText(), (DefaultTableModel) tabelaFornecedor.getModel(), lblStatusFornecedor);
 
     }//GEN-LAST:event_txtFormadePagamentoKeyReleased
 
@@ -804,7 +804,7 @@ public final class Caixa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairFornecedorActionPerformed
 
     private void InternalFrameFornecedorInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_InternalFrameFornecedorInternalFrameClosed
-
+/*
         txtDescricao.setEnabled(true);
         txtFornecedor.setEnabled(true);
         txtNota.setEnabled(true);
@@ -818,7 +818,7 @@ public final class Caixa extends javax.swing.JFrame {
         txtPagto.setEnabled(true);
         btnPesquisarFornecedor.setEnabled(true);
 
-        btnPesquisarFornecedor.grabFocus();
+        btnPesquisarFornecedor.grabFocus(); */
 
     }//GEN-LAST:event_InternalFrameFornecedorInternalFrameClosed
 
