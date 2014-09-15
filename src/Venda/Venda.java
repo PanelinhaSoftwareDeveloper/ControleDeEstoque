@@ -29,6 +29,43 @@ public class Venda extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        InternalFrameVendas = new javax.swing.JInternalFrame();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        lblCodigoCompra = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        lblDataCadastro = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txtNota = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        txtResponsavel = new javax.swing.JTextField();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabel16 = new javax.swing.JLabel();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         txtpesquisar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -46,16 +83,223 @@ public class Venda extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
+        InternalFrameVendas.setClosable(true);
+        InternalFrameVendas.setTitle("Novo cadastro");
+        InternalFrameVendas.setVisible(true);
+        InternalFrameVendas.getContentPane().setLayout(null);
+
+        jLabel3.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel3.setText("Descrição da venda");
+        InternalFrameVendas.getContentPane().add(jLabel3);
+        jLabel3.setBounds(140, 10, 162, 30);
+
+        jTextField1.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        InternalFrameVendas.getContentPane().add(jTextField1);
+        jTextField1.setBounds(140, 40, 520, 32);
+
+        jLabel4.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel4.setText("Cliente");
+        InternalFrameVendas.getContentPane().add(jLabel4);
+        jLabel4.setBounds(20, 90, 70, 30);
+
+        jTextField2.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        InternalFrameVendas.getContentPane().add(jTextField2);
+        jTextField2.setBounds(20, 120, 220, 32);
+
+        jLabel5.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel5.setText("Adicione produtos à venda");
+        InternalFrameVendas.getContentPane().add(jLabel5);
+        jLabel5.setBounds(20, 170, 225, 30);
+
+        jButton1.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jButton1.setText("...");
+        InternalFrameVendas.getContentPane().add(jButton1);
+        jButton1.setBounds(240, 120, 40, 32);
+
+        jTable2.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable2.setRowHeight(25);
+        jScrollPane2.setViewportView(jTable2);
+
+        InternalFrameVendas.getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(20, 200, 620, 180);
+
+        jButton2.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jButton2.setText("+");
+        InternalFrameVendas.getContentPane().add(jButton2);
+        jButton2.setBounds(650, 200, 50, 40);
+
+        jButton3.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jButton3.setText("-");
+        InternalFrameVendas.getContentPane().add(jButton3);
+        jButton3.setBounds(650, 250, 50, 40);
+
+        jLabel6.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel6.setText("Parcelas");
+        InternalFrameVendas.getContentPane().add(jLabel6);
+        jLabel6.setBounds(720, 170, 72, 30);
+
+        jTable3.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
+
+        InternalFrameVendas.getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(720, 200, 270, 180);
+
+        jLabel7.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel7.setText("Valor da venda");
+        InternalFrameVendas.getContentPane().add(jLabel7);
+        jLabel7.setBounds(20, 400, 130, 30);
+
+        jLabel8.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("0,00");
+        InternalFrameVendas.getContentPane().add(jLabel8);
+        jLabel8.setBounds(20, 430, 130, 30);
+
+        jLabel9.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel9.setText("Pago na 1ª parcela");
+        InternalFrameVendas.getContentPane().add(jLabel9);
+        jLabel9.setBounds(820, 400, 170, 30);
+
+        jTextField3.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        InternalFrameVendas.getContentPane().add(jTextField3);
+        jTextField3.setBounds(820, 430, 70, 32);
+
+        jLabel10.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel10.setText("Parcelas");
+        InternalFrameVendas.getContentPane().add(jLabel10);
+        jLabel10.setBounds(720, 400, 72, 30);
+
+        jSpinner1.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        InternalFrameVendas.getContentPane().add(jSpinner1);
+        jSpinner1.setBounds(720, 430, 70, 32);
+
+        jButton4.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jButton4.setText("Salvar");
+        InternalFrameVendas.getContentPane().add(jButton4);
+        jButton4.setBounds(20, 500, 100, 35);
+
+        jButton5.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jButton5.setText("Sair");
+        InternalFrameVendas.getContentPane().add(jButton5);
+        jButton5.setBounds(130, 500, 100, 35);
+
+        jLabel11.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel11.setText("Forma de pagamento");
+        InternalFrameVendas.getContentPane().add(jLabel11);
+        jLabel11.setBounds(220, 400, 180, 30);
+
+        jTextField4.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        InternalFrameVendas.getContentPane().add(jTextField4);
+        jTextField4.setBounds(220, 430, 380, 32);
+
+        jButton6.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jButton6.setText("...");
+        InternalFrameVendas.getContentPane().add(jButton6);
+        jButton6.setBounds(600, 430, 40, 32);
+
+        jLabel12.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel12.setText("Data da venda");
+        InternalFrameVendas.getContentPane().add(jLabel12);
+        jLabel12.setBounds(750, 90, 120, 30);
+
+        jLabel15.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel15.setText("Código");
+        InternalFrameVendas.getContentPane().add(jLabel15);
+        jLabel15.setBounds(20, 10, 60, 30);
+
+        lblCodigoCompra.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        lblCodigoCompra.setForeground(new java.awt.Color(255, 0, 0));
+        lblCodigoCompra.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCodigoCompra.setText("Código");
+        InternalFrameVendas.getContentPane().add(lblCodigoCompra);
+        lblCodigoCompra.setBounds(20, 40, 60, 30);
+
+        jLabel19.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel19.setText("Cadastrado em");
+        InternalFrameVendas.getContentPane().add(jLabel19);
+        jLabel19.setBounds(700, 10, 130, 30);
+
+        lblDataCadastro.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        lblDataCadastro.setForeground(new java.awt.Color(255, 0, 0));
+        lblDataCadastro.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDataCadastro.setText("Data do cadastro");
+        InternalFrameVendas.getContentPane().add(lblDataCadastro);
+        lblDataCadastro.setBounds(700, 40, 150, 30);
+
+        jLabel13.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel13.setText("Nº da nota");
+        InternalFrameVendas.getContentPane().add(jLabel13);
+        jLabel13.setBounds(300, 90, 90, 30);
+
+        txtNota.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        InternalFrameVendas.getContentPane().add(txtNota);
+        txtNota.setBounds(300, 120, 150, 32);
+
+        jLabel14.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel14.setText("Responsável");
+        InternalFrameVendas.getContentPane().add(jLabel14);
+        jLabel14.setBounds(470, 90, 99, 30);
+
+        txtResponsavel.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        InternalFrameVendas.getContentPane().add(txtResponsavel);
+        txtResponsavel.setBounds(470, 120, 260, 32);
+
+        jDateChooser1.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        InternalFrameVendas.getContentPane().add(jDateChooser1);
+        jDateChooser1.setBounds(750, 120, 150, 32);
+
+        jLabel16.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        jLabel16.setText("Hora");
+        InternalFrameVendas.getContentPane().add(jLabel16);
+        jLabel16.setBounds(920, 90, 40, 30);
+
+        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        InternalFrameVendas.getContentPane().add(jFormattedTextField1);
+        jFormattedTextField1.setBounds(920, 120, 70, 32);
+
+        jPanel1.add(InternalFrameVendas);
+        InternalFrameVendas.setBounds(0, 0, 1030, 580);
+
+        jLabel1.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         jLabel1.setText("Pesquisar Vendas");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(10, 10, 138, 25);
+        jLabel1.setBounds(20, 11, 150, 30);
 
-        txtpesquisar.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
+        txtpesquisar.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         jPanel1.add(txtpesquisar);
-        txtpesquisar.setBounds(10, 40, 670, 32);
+        txtpesquisar.setBounds(20, 40, 850, 32);
 
-        jTable1.setFont(new java.awt.Font("Nirmala UI", 0, 16)); // NOI18N
+        jTable1.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -82,14 +326,14 @@ public class Venda extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 90, 670, 290);
+        jScrollPane1.setBounds(20, 90, 850, 280);
 
-        jLabel2.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         jLabel2.setText("Vendas cadastradas:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(10, 390, 175, 25);
+        jLabel2.setBounds(20, 410, 440, 21);
 
-        btnnovo.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
+        btnnovo.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         btnnovo.setText("Novo");
         btnnovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,9 +341,9 @@ public class Venda extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnnovo);
-        btnnovo.setBounds(10, 430, 90, 45);
+        btnnovo.setBounds(20, 490, 100, 35);
 
-        btndados.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
+        btndados.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         btndados.setText("Dados");
         btndados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,14 +351,14 @@ public class Venda extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btndados);
-        btndados.setBounds(110, 430, 90, 45);
+        btndados.setBounds(130, 490, 100, 35);
 
-        btnexcluir.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
+        btnexcluir.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         btnexcluir.setText("Excluir");
         jPanel1.add(btnexcluir);
-        btnexcluir.setBounds(210, 430, 90, 45);
+        btnexcluir.setBounds(240, 490, 100, 35);
 
-        btnsair.setFont(new java.awt.Font("Nirmala UI", 0, 18)); // NOI18N
+        btnsair.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         btnsair.setText("Sair");
         btnsair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,17 +366,17 @@ public class Venda extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnsair);
-        btnsair.setBounds(590, 430, 90, 45);
+        btnsair.setBounds(770, 490, 100, 35);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1030, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
         );
 
         pack();
@@ -154,6 +398,10 @@ public class Venda extends javax.swing.JFrame {
         this.dispose();
 
     }//GEN-LAST:event_btnsairActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,15 +439,52 @@ public class Venda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JInternalFrame InternalFrameVendas;
     private javax.swing.JButton btndados;
     private javax.swing.JButton btnexcluir;
     private javax.swing.JButton btnnovo;
     private javax.swing.JButton btnsair;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel lblCodigoCompra;
+    private javax.swing.JLabel lblDataCadastro;
+    private javax.swing.JTextField txtNota;
+    private javax.swing.JTextField txtResponsavel;
     private javax.swing.JTextField txtpesquisar;
     // End of variables declaration//GEN-END:variables
 }

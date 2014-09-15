@@ -14,6 +14,7 @@ import javax.swing.table.JTableHeader;
 
 public final class Calendario extends javax.swing.JFrame {
     
+    SimpleDateFormat sdf = new SimpleDateFormat();
     DimensionaImagem dimImagem = new DimensionaImagem();
     ConexaoBanco banco = new ConexaoBanco();
     public java.sql.PreparedStatement ps;
@@ -28,7 +29,7 @@ public final class Calendario extends javax.swing.JFrame {
         JTableHeader cabecalhoEventos = tabelaEventos.getTableHeader();
         cabecalhoEventos.setFont(font);
         
-        carregaEvento();
+        carregaEvento(btnMostrarTodos.getText());
         
         txtDescricaoEvento.setLineWrap(true);
         txtDescricaoEvento.setWrapStyleWord(true);
@@ -66,12 +67,12 @@ public final class Calendario extends javax.swing.JFrame {
         calendarioAnual = new com.toedter.calendar.JCalendar();
         btnAddEvento = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnMostrarTodos = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
         lblImagemFundo = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabelaEventos = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnDados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Calendário");
@@ -198,6 +199,11 @@ public final class Calendario extends javax.swing.JFrame {
         jButton3.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         jButton3.setText("Fechar");
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         PainelPrincipal.add(jButton3);
         jButton3.setBounds(880, 490, 100, 35);
 
@@ -242,11 +248,16 @@ public final class Calendario extends javax.swing.JFrame {
         PainelPrincipal.add(btnExcluir);
         btnExcluir.setBounds(240, 490, 100, 35);
 
-        jButton6.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
-        jButton6.setText("Mostrar todos");
-        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        PainelPrincipal.add(jButton6);
-        jButton6.setBounds(690, 490, 180, 35);
+        btnMostrarTodos.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        btnMostrarTodos.setText("Mostrar todos");
+        btnMostrarTodos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMostrarTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarTodosActionPerformed(evt);
+            }
+        });
+        PainelPrincipal.add(btnMostrarTodos);
+        btnMostrarTodos.setBounds(690, 490, 180, 35);
 
         lblStatus.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
         lblStatus.setText("Eventos do dia selecionado: 0");
@@ -285,7 +296,7 @@ public final class Calendario extends javax.swing.JFrame {
         tabelaEventos.setRowHeight(25);
         jScrollPane3.setViewportView(tabelaEventos);
         if (tabelaEventos.getColumnModel().getColumnCount() > 0) {
-            tabelaEventos.getColumnModel().getColumn(0).setPreferredWidth(250);
+            tabelaEventos.getColumnModel().getColumn(0).setPreferredWidth(260);
             tabelaEventos.getColumnModel().getColumn(1).setPreferredWidth(400);
             tabelaEventos.getColumnModel().getColumn(2).setPreferredWidth(70);
         }
@@ -293,16 +304,16 @@ public final class Calendario extends javax.swing.JFrame {
         PainelPrincipal.add(jScrollPane3);
         jScrollPane3.setBounds(450, 40, 530, 330);
 
-        jButton1.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
-        jButton1.setText("Dados");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDados.setFont(new java.awt.Font("NSimSun", 0, 18)); // NOI18N
+        btnDados.setText("Dados");
+        btnDados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDadosActionPerformed(evt);
             }
         });
-        PainelPrincipal.add(jButton1);
-        jButton1.setBounds(130, 490, 100, 35);
+        PainelPrincipal.add(btnDados);
+        btnDados.setBounds(130, 490, 100, 35);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -324,11 +335,14 @@ public final class Calendario extends javax.swing.JFrame {
         calendarioEvento.setDate(new Date());
         txtNomeEvento.setText("");
         txtDescricaoEvento.setText("");
+        lblDataCadastro.setText("Data do cadastro");
         
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        sdf.applyPattern("HH:mm"); //= new SimpleDateFormat("HH:mm");
         txtHora.setText(sdf.format(new Date()));
         
+        InternalFrameAddEvento.setTitle("Novo cadastro");
         InternalFrameAddEvento.setVisible(true);
+        
         txtNomeEvento.grabFocus();
         
     }//GEN-LAST:event_btnAddEventoActionPerformed
@@ -351,26 +365,84 @@ public final class Calendario extends javax.swing.JFrame {
         }
         else
         {
-            addEvento();
+            if (InternalFrameAddEvento.getTitle().equals("Novo cadastro"))
+            {
+                addEvento();
+                carregaEvento(btnMostrarTodos.getText());
+                InternalFrameAddEvento.dispose();
+            }
+            else
+            {
+                updateDadosEvento(Integer.valueOf(lblCodigo.getText()));
+                carregaEvento(btnMostrarTodos.getText());
+                InternalFrameAddEvento.dispose();
+            }
         }
         
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void calendarioAnualPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_calendarioAnualPropertyChange
-        
-        carregaEvento();
+
+        carregaEvento(btnMostrarTodos.getText());
         
     }//GEN-LAST:event_calendarioAnualPropertyChange
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         
-        
+        int linha = tabelaEventos.getSelectedRow();
+        if (linha < 0) 
+        {
+            JOptionPane.showMessageDialog(null, "Selecione o evento para alterar!", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+        {
+            int resp = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?", "Atenção", JOptionPane.YES_NO_OPTION);
+            if (resp == 0) {
+                excluirEvento(Integer.valueOf(tabelaEventos.getModel().getValueAt(linha, 2).toString()));
+                carregaEvento(btnMostrarTodos.getText());
+            }
+        }
         
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDadosActionPerformed
+        
+        int linha = tabelaEventos.getSelectedRow();
+        if (linha < 0) 
+        {
+            JOptionPane.showMessageDialog(null, "Selecione o evento para alterar!", "Atenção", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+        {
+            carregarDadosEvento(Integer.valueOf(tabelaEventos.getModel().getValueAt(linha, 2).toString()));
+            
+            InternalFrameAddEvento.setTitle("Alteração de dados");
+            InternalFrameAddEvento.setVisible(true);
+            
+            txtNomeEvento.grabFocus();
+        }
+        
+    }//GEN-LAST:event_btnDadosActionPerformed
+
+    private void btnMostrarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTodosActionPerformed
+                
+        if (btnMostrarTodos.getText().equals("Mostrar todos")) {
+            btnMostrarTodos.setText("Ocultar todos");
+            carregaEvento(btnMostrarTodos.getText());
+        }
+        else 
+        {
+            btnMostrarTodos.setText("Mostrar todos");
+            carregaEvento(btnMostrarTodos.getText());
+        }
+        
+    }//GEN-LAST:event_btnMostrarTodosActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        this.dispose();
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -409,11 +481,82 @@ public final class Calendario extends javax.swing.JFrame {
     
     //AQUI COMEÇAM OS MÉTODOS
     
+    public void updateDadosEvento(int codigoEvento) {
+        
+        sdf.applyPattern("yyyy/MM/dd");
+        String data = sdf.format(calendarioEvento.getDate())+" "+txtHora.getText();
+        
+        try
+        {
+            banco.conexaoBanco();
+            ps = banco.con.prepareStatement("update calendario set Evento = '"+txtNomeEvento.getText()+"', "
+                    + "Descricao = '"+txtDescricaoEvento.getText()+"', "
+                    + "Data = '"+data+"' "
+                    + "where Codigo_Evento = '"+codigoEvento+"'");
+            ps.executeUpdate();
+            
+            ps.close();
+            banco.fecharConexaoBanco();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        
+    }
+    
+    public void excluirEvento(int codigoEvento) {
+        
+        try
+        {
+            banco.conexaoBanco();
+            ps = banco.con.prepareStatement("update calendario set Excluido = 1 where Codigo_Evento = '"+codigoEvento+"'");
+            ps.executeUpdate();
+            
+            ps.close();
+            banco.fecharConexaoBanco();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        
+    }
+    
+    public void carregarDadosEvento(int codigoEvento) {
+        
+        try
+        {
+            banco.conexaoBanco();
+            rs = banco.st.executeQuery("select * from calendario where Codigo_Evento = '"+codigoEvento+"'");
+            while (rs.next()) {
+                lblCodigo.setText(String.valueOf(codigoEvento));
+                txtDescricaoEvento.setText(rs.getString("Descricao"));
+                txtNomeEvento.setText(rs.getString("Evento"));
+                calendarioEvento.setDate(rs.getDate("Data"));
+                
+                sdf.applyPattern("HH:mm");
+                txtHora.setText(sdf.format(rs.getTime("Data")));
+                
+                sdf.applyPattern("dd/MM/yyyy");
+                lblDataCadastro.setText(sdf.format(rs.getDate("Data_Cadastro")));
+            }
+            
+            rs.close();
+            banco.fecharConexaoBanco();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        
+    }
+    
     public void addEvento() {
         
         try
         {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+            sdf.applyPattern("yyyy/MM/dd");
             String Data = sdf.format(calendarioEvento.getDate());
             Data = Data + " " + txtHora.getText() + ":00";
             
@@ -428,10 +571,6 @@ public final class Calendario extends javax.swing.JFrame {
             banco.fecharConexaoBanco();
             
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
-            
-            carregaEvento();
-            
-            InternalFrameAddEvento.dispose();
         }
         catch (HeadlessException | SQLException e)
         {
@@ -441,30 +580,40 @@ public final class Calendario extends javax.swing.JFrame {
         
     }
     
-    public void carregaEvento() {
+    public void carregaEvento(String tipo) {
+        
+        sdf.applyPattern("yyyy/MM/dd 00:00:00");
+        String DataInicio = sdf.format(calendarioAnual.getDate());
+
+        sdf.applyPattern("yyyy/MM/dd 23:59:59");
+        String DataFim = sdf.format(calendarioAnual.getDate());
+
+        sdf.applyPattern("dd/MM/yyyy HH:mm:ss");
+        String DataBrasil;
+        
+        int cont = 0;
+        
+        String Query;
+        if (tipo.equals("Mostrar todos")) 
+        {
+            Query = "select * from calendario where Data between '"+DataInicio+"' and '"+DataFim+"' "
+                    + "and Excluido = 0 order by Data";
+        }
+        else
+        {
+             Query = "select * from calendario where Excluido = 0 order by Data";
+        }
         
         try
         {
-            SimpleDateFormat dataInicio = new SimpleDateFormat("yyyy/MM/dd 00:00:00");
-            String DataInicio = dataInicio.format(calendarioAnual.getDate());
-            
-            SimpleDateFormat dataFim = new SimpleDateFormat("yyyy/MM/dd 23:59:59");
-            String DataFim = dataFim.format(calendarioAnual.getDate());
-            
-            SimpleDateFormat dateFormatBrasil = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            String DataBrasil;
-            
-            int cont = 0;
-            
             modelo = (DefaultTableModel) tabelaEventos.getModel();
             modelo.setRowCount(0);
             
             banco.conexaoBanco();
-            rs = banco.st.executeQuery("select * from calendario where Data between '"+DataInicio+"' and '"+DataFim+"' "
-                    + "and Excluido = 0 order by Data");
+            rs = banco.st.executeQuery(Query);
             while (rs.next())
             {
-                DataBrasil = dateFormatBrasil.format(rs.getTimestamp("Data"));
+                DataBrasil = sdf.format(rs.getTimestamp("Data"));
                 modelo.addRow(new Object[] {
                     DataBrasil,
                     rs.getString("Evento"),
@@ -491,14 +640,14 @@ public final class Calendario extends javax.swing.JFrame {
     private javax.swing.JInternalFrame InternalFrameAddEvento;
     private javax.swing.JPanel PainelPrincipal;
     private javax.swing.JButton btnAddEvento;
+    private javax.swing.JButton btnDados;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnMostrarTodos;
     private javax.swing.JButton btnOk;
     private javax.swing.JButton btnSair;
     private com.toedter.calendar.JCalendar calendarioAnual;
     private com.toedter.calendar.JDateChooser calendarioEvento;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
